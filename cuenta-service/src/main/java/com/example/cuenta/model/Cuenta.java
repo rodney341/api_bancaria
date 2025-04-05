@@ -15,9 +15,10 @@ public class Cuenta {
     private Long cuentaId;
 
     @Column(name = "numero_cuenta", nullable = false, unique = true)
-    private String numeroCuenta;
+    private Long numeroCuenta;
 
-    private String tipoCuenta;
+    @Enumerated(EnumType.STRING)
+    private TipoCuenta tipoCuenta;
     private Double saldoInicial;
     private Boolean estado;
 

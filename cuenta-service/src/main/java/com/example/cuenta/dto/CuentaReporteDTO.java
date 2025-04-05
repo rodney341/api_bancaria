@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class CuentaReporteDTO {
-    private String numeroCuenta;
+    private Long numeroCuenta;
     private Double saldo;
     private List<Movimiento> movimientos;
 }

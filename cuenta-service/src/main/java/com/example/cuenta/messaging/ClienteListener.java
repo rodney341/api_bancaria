@@ -2,11 +2,13 @@ package com.example.cuenta.messaging;
 
 import com.example.cuenta.config.RabbitConfig;
 import com.example.cuenta.model.Cuenta;
+import com.example.cuenta.model.TipoCuenta;
 import com.example.cuenta.repository.CuentaRepository;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Random;
 import java.util.UUID;
 
 @Service
@@ -21,8 +23,8 @@ public class ClienteListener {
 
         Cuenta cuenta = new Cuenta();
         cuenta.setClienteId(clienteId);
-        cuenta.setNumeroCuenta(UUID.randomUUID().toString().substring(0, 10)); // Número aleatorio
-        cuenta.setTipoCuenta("AHORROS");
+        cuenta.setNumeroCuenta(1000000000L + new Random().nextInt(900000000));
+        cuenta.setTipoCuenta(TipoCuenta.AHORRO);
         cuenta.setSaldoInicial(0.0);
         cuenta.setEstado(true);
 
