@@ -1,15 +1,12 @@
 package com.example.cuenta.exeption;
 
+import com.example.cuenta.model.TipoCuenta;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
-
-import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -35,11 +32,12 @@ public class GlobalExceptionHandler {
         );
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
-    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
-    public ResponseEntity<ApiError> handleEnumConversionError(CuentaNoEncontradaException ex, HttpServletRequest request) {
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<ApiError> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpServletRequest request) {
         ApiError error = new ApiError(
                 HttpStatus.BAD_REQUEST.value(),
-                "Tipo de dato inválido",
+                "Error al leer el cuerpo de la solicitud. Verifica que el formato JSON sea correcto.",
                 ex.getMessage(),
                 request.getRequestURI()
         );
