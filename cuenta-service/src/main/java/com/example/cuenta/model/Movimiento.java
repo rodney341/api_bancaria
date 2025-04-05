@@ -1,6 +1,7 @@
 
 package com.example.cuenta.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -15,13 +16,15 @@ public class Movimiento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long movimientoId;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate fecha;
-    private String tipoMovimiento;
-    private Double valor;
-    private Double saldo;
-
+    @Column(name = "saldo_inicial")
+    private Double saldoInicial;
+    private Double movimiento;
+    @Column(name = "saldo_disponible")
+    private Double saldoDisponible;
     @Column(name = "cuenta_id")
-    private Long cuentaId; // Relación por ID
+    private Long cuentaId;
 
 }
 

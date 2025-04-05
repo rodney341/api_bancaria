@@ -25,7 +25,7 @@ public class ClienteListener {
         cuenta.setClienteId(clienteId);
         cuenta.setNumeroCuenta(1000000000L + new Random().nextInt(900000000));
         cuenta.setTipoCuenta(TipoCuenta.AHORROS);
-        cuenta.setSaldoInicial(0.0);
+        cuenta.setSaldo(0.0);
         cuenta.setEstado(true);
 
         cuentaRepository.save(cuenta);

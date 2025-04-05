@@ -33,7 +33,8 @@ public class ReporteService {
 
             return new CuentaReporteDTO(
                 cuenta.getNumeroCuenta(),
-                cuenta.getSaldoInicial(),
+                cuenta.getSaldo(),
+                cuenta.getEstado(),
                 movimientos
             );
         }).collect(Collectors.toList());

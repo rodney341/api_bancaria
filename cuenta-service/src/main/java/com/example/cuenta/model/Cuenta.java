@@ -19,7 +19,7 @@ public class Cuenta {
 
     @Enumerated(EnumType.STRING)
     private TipoCuenta tipoCuenta;
-    private Double saldoInicial;
+    private Double saldo;
     private Boolean estado;
 
     @Column(name = "cliente_id")

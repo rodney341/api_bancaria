@@ -25,19 +25,19 @@ public class MovimientoService {
     public Movimiento registrarMovimientoEnCuenta(Movimiento movimiento) {
         Cuenta cuenta = cuentaRepository.findById(movimiento.getCuentaId())
                 .orElseThrow(() -> new RuntimeException("Cuenta no encontrada"));
-
-        double nuevoSaldo = cuenta.getSaldoInicial() + movimiento.getValor();
+        Double saldoInicial = cuenta.getSaldo();
+        Double nuevoSaldo = saldoInicial + movimiento.getMovimiento();
 
         if (nuevoSaldo < 0) {
             throw new SaldoInsuficienteException("No hay suficiente saldo para realizar el movimiento.");
         }
 
-        cuenta.setSaldoInicial(nuevoSaldo);
-        cuentaRepository.save(cuenta);
-
-        movimiento.setSaldo(nuevoSaldo);
+        movimiento.setSaldoInicial(saldoInicial);
+        movimiento.setSaldoDisponible(nuevoSaldo);
         movimiento.setFecha(LocalDate.now());
 
+        cuenta.setSaldo(nuevoSaldo);
+        cuentaRepository.save(cuenta);
 
         return movimientoRepository.save(movimiento);
     }
