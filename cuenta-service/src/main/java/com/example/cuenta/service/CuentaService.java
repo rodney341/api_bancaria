@@ -32,6 +32,7 @@ public class CuentaService {
         return cuentaRepository.findById(id).map(cuenta -> {
             cuenta.setTipoCuenta(cuentaActualizada.getTipoCuenta());
             cuenta.setEstado(cuentaActualizada.getEstado());
+            cuenta.setSaldo(cuentaActualizada.getSaldo());
             return cuentaRepository.save(cuenta);
         });
     }
